@@ -52,15 +52,16 @@ jobs:
       - name: Build with Maven
         working-directory: ./ans/ans-service
         run: |
-          alias mvn-8="JAVA_HOME=$JAVA_HOME_8_X64 && mvn"
-          mvn-8 -version
-          mvn-8 -B package verify #docker:build docker:tag docker:push
+          JAVA_HOME=$JAVA_HOME_8_X64
+          mvn -version
+          mvn -B package verify #docker:build docker:tag docker:push
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Export sonar report
         working-directory: ./ans/ans-service
         run: |
+          JAVA_HOME=$JAVA_HOME_8_X64
           mvn-11 -version
           mvn-11 -B sonar:sonar
         env:

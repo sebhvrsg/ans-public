@@ -46,8 +46,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: setup maven
         run: |
+          shopt -s expand_aliases
           alias mvn-8="JAVA_HOME=$JAVA_HOME_8_X64 && mvn"
-          alias mvn-11="JAVA_HOME=JAVA_HOME_11_X64 && mvn"
+          alias mvn-11="JAVA_HOME=$JAVA_HOME_11_X64 && mvn"
       - name: Build with Maven
         working-directory: ./ans/ans-service
         run: |

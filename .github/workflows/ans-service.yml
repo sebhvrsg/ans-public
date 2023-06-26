@@ -52,6 +52,7 @@ jobs:
       - name: Build with Maven
         working-directory: ./ans/ans-service
         run: |
+          alias mvn-8="JAVA_HOME=$JAVA_HOME_8_X64 && mvn"
           mvn-8 -version
           mvn-8 -B package verify #docker:build docker:tag docker:push
         env:

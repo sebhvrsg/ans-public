@@ -44,21 +44,23 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: setup maven
+        run: |
+          alias mvn-8="JAVA_HOME=$JAVA_HOME_8_X64 && mvn"
+          alias mvn-11="JAVA_HOME=JAVA_HOME_11_X64 && mvn"
       - name: Build with Maven
         working-directory: ./ans/ans-service
         run: |
-          echo "JAVA_HOME_8_X64=$JAVA_HOME" >> $GITHUB_ENV
-          mvn -version
-          mvn -B package verify #docker:build docker:tag docker:push
+          mvn-8 -version
+          mvn-8 -B package verify #docker:build docker:tag docker:push
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Export sonar report
         working-directory: ./ans/ans-service
         run: |
-          echo "JAVA_HOME_11_X64=$JAVA_HOME" >> $GITHUB_ENV
-          mvn -version
-          mvn -B sonar:sonar
+          mvn-11 -version
+          mvn-11 -B sonar:sonar
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

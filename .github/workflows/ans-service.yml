@@ -62,8 +62,8 @@ jobs:
         working-directory: ./ans/ans-service
         run: |
           JAVA_HOME=$JAVA_HOME_8_X64
-          mvn-11 -version
-          mvn-11 -B sonar:sonar
+          mvn -version
+          mvn -B sonar:sonar
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

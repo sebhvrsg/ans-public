@@ -47,7 +47,7 @@ jobs:
       - name: Build with Maven
         working-directory: ./ans/ans-service
         run: |
-          echo "JAVA_8=$JAVA_HOME" >> $GITHUB_ENV
+          echo "JAVA_HOME_8_X64=$JAVA_HOME" >> $GITHUB_ENV
           mvn -B deploy verify #docker:build docker:tag docker:push
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
@@ -55,7 +55,7 @@ jobs:
       - name: Export sonar report
         working-directory: ./ans/ans-service
         run: |
-          echo "JAVA_11=$JAVA_HOME" >> $GITHUB_ENV
+          echo "JAVA_HOME_11_X64=$JAVA_HOME" >> $GITHUB_ENV
           mvn -B sonar:sonar
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password

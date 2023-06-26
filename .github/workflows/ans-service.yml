@@ -48,6 +48,7 @@ jobs:
         working-directory: ./ans/ans-service
         run: |
           echo "JAVA_HOME_8_X64=$JAVA_HOME" >> $GITHUB_ENV
+          mvn -version
           mvn -B package verify #docker:build docker:tag docker:push
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
@@ -56,6 +57,7 @@ jobs:
         working-directory: ./ans/ans-service
         run: |
           echo "JAVA_HOME_11_X64=$JAVA_HOME" >> $GITHUB_ENV
+          mvn -version
           mvn -B sonar:sonar
         env:
           GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
